@@ -247,7 +247,7 @@ $('#go').onclick=()=>{const e=$('#err'),f=calc(),nm=$('#nm').value.trim(),ph=$('
  if(pu.toLowerCase()===dr.toLowerCase())return e.textContent='Pickup and drop-off must be different.';
  if(!$('#dt').value||!$('#tm').value)return e.textContent='Please pick a date and time.';
  if(new Date($('#dt').value+'T'+$('#tm').value)<Date.now()-6e4)return e.textContent='Pickup time is in the past.';
- const ref='BC-'+Math.random().toString(36).slice(2,6).toUpperCase()+Math.floor(Math.random()*90+10);
+ const ref='Sent!!';
  bk={ref,f};tip=0;$('#mref').textContent='Ref '+ref;
  const dn=dvp.dn?esc(dvp.dn)+(dvp.dp?' · '+esc(dvp.dp):''):'Assigned before pickup';
  $('#mkv').innerHTML=[['Name',esc(nm)],['Contact',esc(ph)],['Pickup',esc(pu)],['Drop-off',esc(dr)],['When',$('#dt').value+' · '+$('#tm').value],['Cab',C[cls].n+' · '+C[cls].cap+' seats'],['Driver',dn],['Total','<b id="mtot"></b>']].map(r=>`<div class="kv"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('');
@@ -255,7 +255,7 @@ $('#go').onclick=()=>{const e=$('#err'),f=calc(),nm=$('#nm').value.trim(),ph=$('
  rtip();$('#modal').classList.add('open');$('#done').focus()};
 function rtip(){$('#tips').innerHTML=[0,20,50,100].map(v=>`<button class="chip${v===tip?' on':''}" data-t="${v}" type="button">${v?inr(v):'No tip'}</button>`).join('');$('#mtot').textContent=bk.f.km?inr(bk.f.tot+tip)+(tip?` (incl. ${inr(tip)} tip)`:''):'By meter'+(tip?` + ${inr(tip)} tip`:'');document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{tip=+b.dataset.t;rtip()})}
 function closeM(m){$('#modal').classList.remove('open');$('#err').textContent=m||''}
-$('#done').onclick=()=>closeM('Thank you! Ride '+bk.ref+' is booked.');$('#cancel').onclick=()=>closeM('Booking cancelled.');
+$('#done').onclick=()=>closeM('Thank you! '+bk.ref+'');$('#cancel').onclick=()=>closeM('Booking cancelled.');
 addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#modal').classList.contains('open'))closeM()});
 gsap.from('#h1 span,#h1 small',{opacity:0,x:-50,filter:'blur(16px)',duration:1.3,stagger:.14,delay:.5,ease:'power3.out'});gsap.from('.hr',{opacity:0,y:30,duration:1,delay:1.5});
 setCls('family');fare();
